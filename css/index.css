@@ -1,0 +1,102 @@
+/*
+FE23 - MP2 - ELVIRA ERICSSON
+*/
+
+/*//////////////////////////////////////////////////////////////////////
+FOLLOWING CSS IS FOR ROCK-PAPER-SCISSORS GAME
+//////////////////////////////////////////////////////////////////////*/
+body {
+    font-family: 'SairaSemi';
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    background-color: rgba(225, 192, 85, 0.393);
+}
+
+#rockPaperScissors {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bothSides {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.yourScore {
+   text-align: center;
+}
+
+.yourHand img {
+    width: 80px;
+}
+
+.yourHand {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.yourAll img:hover {
+    opacity: 0.5;
+}
+
+.opponentScore img {
+    width: 30px;
+}
+
+.opponentScore {
+    text-align: center;
+}
+
+.opponentHand img {
+    width: 80px;
+}
+
+.opponentHand {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/*//////////////////////////////////////////////////////////////////////
+FOLLOWING CSS IS FOR ROCK-PAPER-SCISSORS SCOREBOARD
+//////////////////////////////////////////////////////////////////////*/
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#scoreBoard {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreBoard h2 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+}
+
+#scoreBoard p {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+button {
+    padding: 20px;
+}
