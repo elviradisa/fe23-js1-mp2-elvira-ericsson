@@ -1,0 +1,77 @@
+<!--
+FE23 - MP2 - ELVIRA ERICSSON
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/star.jpg" type="image/x-icon">
+    <script src="./js/index.js" defer></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <title>RockPaperScissors</title>
+</head>
+<body>
+    <header>
+        <!--SWITCH BETWEEN 'ROUND 1 / ROUND 2 / ROUND 3'-->
+        <h1>ROUND 1</h1>
+    </header>
+
+    <section id="nameInput">
+          <!--TEXTINPUT TO WRITE NAME-->
+          <input type="text" placeholder="Write username - Press Enter">
+    </section>
+
+    <section id="rockPaperScissors">
+        <div class="bothSides">
+            <div class="yourScore bothScores">
+                <h2>YOUR SCORE</h2>
+                <p>0</p>
+            </div>
+            <div class="yourHand">
+                <div class="yourRock yourAll">
+                    <p>ROCK</p>
+                    <img src="images/rock.png" alt="Rock">
+                </div>
+                <div class="yourPaper yourAll">
+                    <p>PAPER</p>
+                    <img src="images/paper.png" alt="Paper">
+                </div>
+                <div class="yourScissors yourAll">
+                    <p>SCISSORS</p>
+                    <img src="images/SCISSORS.png" alt="Scissors">
+                </div>
+            </div>
+        </div>
+        <div class="bothSides">
+            <div class="opponentScore bothScores">
+                <h2>OPPONENT'S SCORE</h2> 
+                <p>0</p>
+            </div>
+            <div class="opponentHand">
+                <div class="opponentRock">
+                    <p>ROCK</p>
+                    <img src="images/rock.png" alt="Rock">
+                </div>
+                <div class="opponentPaper">
+                    <p>PAPER</p>
+                    <img src="images/paper.png" alt="Paper">
+                </div>
+                <div class="opponentScissors">
+                    <p>SCISSORS</p>
+                    <img src="images/SCISSORS.png" alt="Scissors">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="scoreBoard">
+        <!--SWITCH BETWEEN 'YOU WIN / YOU LOSE...'-->
+        <h2></h2>
+        <!--YOUR SCORE : OPPONENT'S SCORE-->
+        <p></p>
+        <button>PLAY AGAIN</button>
+    </section>
+</body>
+</html>
