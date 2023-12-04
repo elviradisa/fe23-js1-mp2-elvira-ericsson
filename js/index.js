@@ -27,6 +27,13 @@ function nameInputFunction () {
         if (event.key === 'Enter') {
             game.style.display = 'flex';
             header.style.display = 'block';
+
+            // //KOMPLETTERING
+            // const form = document.querySelector('form');
+            // form.addEventListener('submit', event () => {
+            //     event.preventDefault();
+            //     console.log('submit'); 
+            // })
         }
     });
 } 
@@ -35,7 +42,7 @@ nameInputFunction();
 //CLICK ON WHICH HAND YOU WANT TO GO WITH, AND OPPONENTS HAND WILL BE DISPLAYED RANDOMLY
 function playRockPaperScissors () {
     const yourAllElements = document.querySelectorAll('.yourAll img');
-    //forEach-LOOP TO ITERATE OVER EACH ELEMENT IN 'yourAllElements' WHICH IS ETIHER 'ROCK, PAPER OR SCISSORS'
+    //forEach-LOOP TO ITERATE OVER EACH ELEMENT IN 'yourAllElements' WHICH IS EITHER 'ROCK, PAPER OR SCISSORS'
     yourAllElements.forEach(element => { 
         element.addEventListener('click', () => {
             opponentHand.style.display = 'flex'
