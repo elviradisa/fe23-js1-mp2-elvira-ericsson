@@ -15,14 +15,17 @@ FE23 - MP2 - ELVIRA ERICSSON
 <body>
     <header>
         <!--SWITCH BETWEEN 'ROUND 1 / ROUND 2 / ROUND 3'-->
-        <h1>ROUND 1</h1>
+        <h1>ROUND 0</h1>
     </header>
 
-    <section id="nameInput">
-          <!--TEXTINPUT TO WRITE NAME-->
-          <!--Komplettering, input ska alltid finnas i ett form-element-->
-          
-          <input type="text" placeholder="Write username - Press Enter">
+    <section id="usernameSection">
+          <!--TEXTINPUT TO DISPLAY NAME-->
+          <!--KOMPLETTERING, input ska alltid finnas i ett form-element-->
+          <form>
+                <label for="name">Enter your name:</label>
+                <input type="text" id="nameInput" name="name">
+          </form>
+          <p class="username"></p>
     </section>
 
     <section id="rockPaperScissors">
@@ -52,15 +55,15 @@ FE23 - MP2 - ELVIRA ERICSSON
                 <p>0</p>
             </div>
             <div class="opponentHand">
-                <div class="opponentRock">
+                <div class="opponentRock opponentHandAll">
                     <p>ROCK</p>
                     <img src="images/rock.png" alt="Rock">
                 </div>
-                <div class="opponentPaper">
+                <div class="opponentPaper opponentHandAll">
                     <p>PAPER</p>
                     <img src="images/paper.png" alt="Paper">
                 </div>
-                <div class="opponentScissors">
+                <div class="opponentScissors opponentHandAll">
                     <p>SCISSORS</p>
                     <img src="images/scissors.png" alt="Scissors">
                 </div>

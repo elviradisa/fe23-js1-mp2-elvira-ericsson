@@ -10,33 +10,32 @@ let currentRound = 0;
 
 //GETTING IMPORTANT ID´S AND CLASSES AND PUTTING THEM IN VARIABLES TO USE IN CODE LATER ON
 const header = document.querySelector('header');
-const nameInput = document.querySelector('#nameInput');
-const game = document.querySelector('#rockPaperScissors');
 const scoreBoard = document.querySelector('#scoreBoard');
+const game = document.querySelector('#rockPaperScissors');
 const opponentHand = document.querySelector('.opponentHand');
 
 //NOT DISPLAYED SINCE NAME-INPUT IS DISPLAYED FIRST
 game.style.display = 'none';
+header.style.display = 'none';
 scoreBoard.style.display = 'none';
 opponentHand.style.display = 'none';
-header.style.display = 'none';
 
 //WHEN YOU PUT YOUR USERNAME AND 'ENTER'-BUTTON IS PRESSED DOWN, GAME STARTS
 function nameInputFunction () {
-    nameInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            game.style.display = 'flex';
-            header.style.display = 'block';
+    // KOMPLETTERING, visa endast username på sidan, inte hela textinputen
+    const form = document.querySelector('form');
+    const nameInput = document.getElementById('nameInput').value;
 
-            // //KOMPLETTERING
-            // const form = document.querySelector('form');
-            // form.addEventListener('submit', event () => {
-            //     event.preventDefault();
-            //     console.log('submit'); 
-            // })
-        }
-    });
-} 
+    //USERNAME IS DISPLAYED ON PAGE AFTER SUBMITTING IT
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.querySelector('.username').innerText = nameInput;
+        form.style.display = 'none';
+        game.style.display = 'flex';
+        header.style.display = 'block';
+        nameInput.style.display = 'block';
+    })
+}
 nameInputFunction();
 
 //CLICK ON WHICH HAND YOU WANT TO GO WITH, AND OPPONENTS HAND WILL BE DISPLAYED RANDOMLY
@@ -48,8 +47,9 @@ function playRockPaperScissors () {
             opponentHand.style.display = 'flex'
             //RANDOM OPPONENT HAND IS DISPLAYED
             showRandomOpponentHand(element, opponentHand);
-            //CHANGES FROM ROUND 1 UP TO ROUND 10, BASED ON HOW MANY TIMES YOU CLICKED
-            if (currentRound < 10) {
+
+            //CHANGES FROM ROUND 1 UP TO ROUND 10, BASED ON HOW MANY TIMES YOU CLICK
+            if (currentRound < 20) {
                 currentRound++;
                 document.querySelector('h1').textContent = `ROUND ${currentRound}`;
             }
@@ -86,63 +86,50 @@ function showRandomOpponentHand (yourChoice) {
     //GET THE FIRST CLASS FROM THE LIST
     const opponentChoiceClass = opponentHandArray[opponentRandomIndex].classList[0];
 
-    //ADD POINTS ACCORDING TO THE COMPARISONS, AND THEN UPDATE THE SCORES ON EACH SIDE
-    //IF EITHER YOU OR OPPONENT GET 3 POINTS, THE bestOfThree-function WILL BE CALLED
+    // KOMPLETTERING, inga poäng ges om det är lika
+    // CHECK FOR TIE, IF IT'S A TIE, NO PLAYER GETS A POINT
+    if (yourChoiceClass === 'yourRock' && opponentChoiceClass === 'opponentRock') {
+        return;
+    } else if (yourChoiceClass === 'yourPaper' && opponentChoiceClass === 'opponentPaper') {
+        return;
+    } else if (yourChoiceClass === 'yourScissors' && opponentChoiceClass === 'opponentScissors') {
+        return;
+    }
+
+    // ADD POINTS TO PLAYER DEPENDING ON WHO WINS 
     if (yourChoiceClass === 'yourRock') {
         if (opponentChoiceClass === 'opponentScissors') {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
             yourWin++;
-            updateScore();
-            return;
         } else {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
             opponentWins++;
-            updateScore();
-            return;
-        } 
-    }
-    if (yourChoiceClass === 'yourPaper') {
+        }
+    } else if (yourChoiceClass === 'yourPaper') {
         if (opponentChoiceClass === 'opponentRock') {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
             yourWin++;
-            updateScore();
-            return;
         } else {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
             opponentWins++;
-            updateScore();
-            return;
+        }
+    } else if (yourChoiceClass === 'yourScissors') {
+        if (opponentChoiceClass === 'opponentPaper') {
+            yourWin++;
+        } else {
+            opponentWins++;
         }
     }
-    if (yourChoiceClass === 'yourScissors') {
-        if (opponentChoiceClass === 'opponentPaper') {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
-            yourWin++;
-            updateScore();
-            return;
-        } else {
-            if (yourWin && opponentWins == 3) {
-                bestOfThree();
-            }
-            opponentWins++;
-            updateScore();
-            return;
-        }
+
+    // UPDATE THE SCPRES
+    updateScore();
+
+    //KOMPLETTERING, spelet avslutas (med liten delay) efter att någon eller båda har fått 3 poäng
+    // IF EITHER YOU OR OPPONENT HAS THREE POINTS, CALL bestOfThree FUNCTION WITH A DELAY
+    if (yourWin === 3 || opponentWins === 3) {
+        setTimeout(bestOfThree, 500);
     }
 }
 
 //CHECK AND ANNOUNCE WHICH PLAYER WINS ALL THREE ROUNDS, SCOREBOARD IS DISPLAYED AND THE GAME IS NOT
 function bestOfThree () {
+    //HIDE GAME
     game.style.display = 'none';
     header.style.display = 'none';
     nameInput.style.display = 'none';
@@ -150,37 +137,45 @@ function bestOfThree () {
 
     const scoreAnnouncement = document.querySelector('#scoreBoard p');
     const winnerAnnouncement = document.querySelector('#scoreBoard h2');
-
     //DIFFERENT ANNOUNCEMENTS DEPENDING ON WHO WON THE GAME OR IF ITS A TIE
     if (yourWin >= 3) {
         winnerAnnouncement.textContent = 'YOU WIN!';
     } else if (opponentWins >= 3) {
         winnerAnnouncement.textContent = 'YOU LOST...';
-    } else if (yourWin === opponentWins) {
+    } else if (yourWin >= 3 && opponentWins >= 3) {
         winnerAnnouncement.textContent = "IT'S A TIE!";
     }
     //YOUR SCORE NEXT TO OPPONENTS SCORE ON SCOREBOARD
     scoreAnnouncement.textContent = `${yourWin} : ${opponentWins}`;
 
-    //RESET YOURS AND OPPONENTS SCORES TO ZERO
-    yourWin = 0;
-    opponentWins = 0;
-    currentRound = 0;
-    
+    //CALL playAgain-FUNCTION AND PRESS BUTTON 'PLAY AGAIN' TO - PLAY AGAIN!
     playAgain()
 }
 
+function resetGame() {
+    //KOMPLETTERING, reseta poäng och rundan till 0 varje gång spelet börjar om
+    //RESET CURRENT SCORES AND CURRENT ROUND TO ZERO
+    yourWin = 0;
+    opponentWins = 0;
+    currentRound = 0;
+    document.querySelector('h1').textContent = `ROUND ${currentRound}`;
+    document.querySelector('.yourScore p').textContent = `${yourWin}`;
+    document.querySelector('.opponentScore p').textContent = `${opponentWins}`;
+
+    //HIDE SCOREBOARD
+    scoreBoard.style.display = 'none';
+
+    //DISPLAY GAME
+    game.style.display = 'flex';
+    header.style.display = 'flex';
+    nameInput.style.display = 'flex';
+    opponentHand.style.display = 'none';
+}
 //GIVE PLAYER THE CHOICE TO PLAY AGAIN, IF 'PLAY AGAIN' BUTTON GETS CLICKED, THE GAME IS DISPLAYED AGAIN
 function playAgain() {
     const button = document.querySelector('button');
     button.addEventListener('click', () => {
-        game.style.display = 'flex';
-        header.style.display = 'flex';
-        nameInput.style.display= 'flex';
-        scoreBoard.style.display = 'none';
-        opponentHand.style.display = 'none';
+        //CALL THE 'resetGame' FUNCTION 
+        resetGame(); 
     });
 }
-
-
-
