@@ -35,7 +35,6 @@ function nameInputFunction () {
         game.style.display = 'flex';
         header.style.display = 'block';
         nameInput.style.display = 'block';
-        form.submit();
     })
 }
 nameInputFunction();
