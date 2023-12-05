@@ -24,16 +24,18 @@ opponentHand.style.display = 'none';
 function nameInputFunction () {
     // KOMPLETTERING, visa endast username på sidan, inte hela textinputen
     const form = document.querySelector('form');
-    const nameInput = document.getElementById('nameInput').value;
+    
 
     //USERNAME IS DISPLAYED ON PAGE AFTER SUBMITTING IT
     form.addEventListener('submit', (event) => {
-        event.preventDefault();
+        const nameInput = document.getElementById('nameInput').value;
         document.querySelector('.username').innerText = nameInput;
+        event.preventDefault();
         form.style.display = 'none';
         game.style.display = 'flex';
         header.style.display = 'block';
         nameInput.style.display = 'block';
+        form.submit();
     })
 }
 nameInputFunction();
@@ -120,7 +122,7 @@ function showRandomOpponentHand (yourChoice) {
     // UPDATE THE SCPRES
     updateScore();
 
-    //KOMPLETTERING, spelet avslutas (med liten delay) efter att någon eller båda har fått 3 poäng
+    //KOMPLETTERING, spelet avslutas (med liten delay) efter att någon  eller båda har fått 3 poäng
     // IF EITHER YOU OR OPPONENT HAS THREE POINTS, CALL bestOfThree FUNCTION WITH A DELAY
     if (yourWin === 3 || opponentWins === 3) {
         setTimeout(bestOfThree, 500);
